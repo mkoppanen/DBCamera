@@ -59,7 +59,7 @@ static const CGSize kFilterCellSize = { 75, 90 };
         
         [self initVignetteFilter];
 
-        NSBundle *bundle = [NSBundle bundleForClass:DBCameraSegueViewController.class];
+        NSBundle *bundle = [NSBundle bundleForClass:self.class];
 
         NSURL *filter1977      = [NSURL fileURLWithPath: [bundle pathForResource:@"1977"      ofType:@"acv"]];
         NSURL *filterAmaro     = [NSURL fileURLWithPath: [bundle pathForResource:@"amaro"     ofType:@"acv"]];
@@ -95,7 +95,11 @@ static const CGSize kFilterCellSize = { 75, 90 };
 
 - (void)initVignetteFilter {
     vignetteFilter = [[GPUImageVignetteFilter alloc] init];
-    vignetteToneCurveFilter = [[GPUImageToneCurveFilter alloc] initWithACV:@"Vignette"];
+    
+    NSBundle *bundle = [NSBundle bundleForClass:self.class];
+    NSURL *vignette = [NSURL fileURLWithPath: [bundle pathForResource:@"Vignette" ofType:@"acv"]];
+    
+    vignetteToneCurveFilter = [[GPUImageToneCurveFilter alloc] initWithACVURL:vignette];
     vignetteFilterGroup = [[GPUImageFilterGroup alloc] init];
     
     [vignetteFilterGroup addFilter:vignetteToneCurveFilter];
