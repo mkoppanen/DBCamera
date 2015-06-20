@@ -58,19 +58,34 @@ static const CGSize kFilterCellSize = { 75, 90 };
         // Custom initialization
         
         [self initVignetteFilter];
-        
+
+        NSBundle *bundle = [NSBundle bundleForClass:DBCameraSegueViewController.class];
+
+        NSURL *filter1977      = [NSURL fileURLWithPath: [bundle pathForResource:@"1977"      ofType:@"acv"]];
+        NSURL *filterAmaro     = [NSURL fileURLWithPath: [bundle pathForResource:@"amaro"     ofType:@"acv"]];
+        NSURL *filterHudson    = [NSURL fileURLWithPath: [bundle pathForResource:@"Hudson"    ofType:@"acv"]];
+        NSURL *filterMayfair   = [NSURL fileURLWithPath: [bundle pathForResource:@"mayfair"   ofType:@"acv"]];
+        NSURL *filterNashville = [NSURL fileURLWithPath: [bundle pathForResource:@"Nashville" ofType:@"acv"]];
+        NSURL *filterValencia  = [NSURL fileURLWithPath: [bundle pathForResource:@"1977"      ofType:@"acv"]];
+
         _cropArray = @[ @320, @213, @240, @192, @180 ];
         _filtersList = @[ @"normal", @"1977", @"amaro", @"grey", @"hudson", @"mayfair", @"nashville", @"valencia", @"contrastgrey", @"vignette" ];
         _filterMapping = @{ @0:[[GPUImageFilter alloc] init],
                             @1:[[GPUImageToneCurveFilter alloc] initWithACV:@"1977"],
                             @2:[[GPUImageToneCurveFilter alloc] initWithACV:@"amaro"],
+                            @1:[[GPUImageToneCurveFilter alloc] initWithACVURL:filter1977],
+                            @2:[[GPUImageToneCurveFilter alloc] initWithACVURL:filterAmaro],
                             @3:[[GPUImageGrayscaleFilter alloc] init],
                             @4:[[GPUImageToneCurveFilter alloc] initWithACV:@"Hudson"],
                             @5:[[GPUImageToneCurveFilter alloc] initWithACV:@"mayfair"],
                             @6:[[GPUImageToneCurveFilter alloc] initWithACV:@"Nashville"],
                             @7:[[GPUImageToneCurveFilter alloc] initWithACV:@"Valencia"],
-                            @8:[[GrayscaleContrastFilter alloc] init],
-                            @9:vignetteFilterGroup};
+                            @4:[[GPUImageToneCurveFilter alloc] initWithACVURL:filterHudson],
+                            @5:[[GPUImageToneCurveFilter alloc] initWithACVURL:filterMayfair],
+                            @6:[[GPUImageToneCurveFilter alloc] initWithACVURL:filterNashville],
+                            @7:[[GPUImageToneCurveFilter alloc] initWithACVURL:filterValencia],
+                             @8:[[GrayscaleContrastFilter alloc] init],
+                             @9:vignetteFilterGroup};
         
         _selectedFilterIndex = 0;
         
